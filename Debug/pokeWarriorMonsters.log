@@ -1,0 +1,3 @@
+﻿  Player.cpp
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\gameobjects\player.cpp(7): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  pokeWarriorMonsters.vcxproj -> C:\Users\aniki\dev\pokeWarriorMonstersSDL\pokeWarriorMonsters\Debug\pokeWarriorMonsters.exe
