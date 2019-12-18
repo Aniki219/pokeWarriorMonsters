@@ -45,15 +45,16 @@ void Sprite::render(int x, int y, SDL_Rect* clip) {
 	else if (srcRect != nullptr) {
 		clip->x = srcRect->x;
 		clip->y = srcRect->y;
+		clip->w = srcRect->w;
+		clip->h = srcRect->h;
 	}
 
-	//std::cout << mTexture << std::endl;
+	//std::cout << clip->w << std::endl;
 	SDL_RenderCopy(Game::Instance()->getRenderer(), mTexture, clip, &destRect);
 	delete clip;
 }
 
 std::string Sprite::getCurrentAnimation() {
-	std::cout << "hello" << std::endl;
 	return currentAnimation->name;
 }
 

@@ -4,20 +4,18 @@
 #include "../_Headers/Animation.h"
 #include "../_Headers/Sprite.h"
 
-Player::Player(float xpos = 0, float ypos = 0) : GameObject("trainer", xpos, ypos, 32, 40) {
+Player::Player(float xpos = 0, float ypos = 0) : GameObject("trainer", xpos, ypos, GRIDSIZE, GRIDSIZE*1.25) {
 	sprite->createAnimation("up", 0, 4);
 	sprite->createAnimation("down", 1, 4);
 	sprite->createAnimation("right", 2, 4);
 	sprite->createAnimation("left", 3, 4);
 	sprite->setAnimation("down");
 	sprite->imageOffset = new Vector(0, -8);
-
-	drawDepth = 10;
 }
 
 void Player::move() {
 
-	if ((int)position->x % Game::Instance()->gridSize == 0 && (int)position->y % Game::Instance()->gridSize == 0) {
+	if ((int)position->x % GRIDSIZE == 0 && (int)position->y % GRIDSIZE == 0) {
 		velocity->x = 0;
 		velocity->y = 0;
 
@@ -29,13 +27,7 @@ void Player::move() {
 		} else {
 			stepTimer = 0;
 		}
-
-		if (stepTimer > 6) {
-			moveSpeed = 2;
-		}
-		else {
-			moveSpeed = 0;
-		}
+		moveSpeed = (stepTimer > 6) ? 2 : 0;
 
 		if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
 			velocity->x += moveSpeed;
@@ -66,4 +58,5 @@ void Player::move() {
 		
 	}
 	GameObject::move();
+	drawDepth = position->y + size->y;
 }

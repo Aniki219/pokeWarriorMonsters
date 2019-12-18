@@ -3,9 +3,11 @@
 #include "GameObjects/GameObject.h"
 
 class Camera {
+private:
+	Vector* lastPosition;
+	Vector* position;
 public:
 	Camera(int x, int y);
-	Vector* position;
 	GameObject* target;
 
 	void setTarget(GameObject* gameObject);

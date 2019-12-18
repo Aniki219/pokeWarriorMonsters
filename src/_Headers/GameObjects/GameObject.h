@@ -26,7 +26,9 @@ protected:
 		void setSrcRect(SDL_Rect& srcRect);
 		int getX();
 		int getY();
-		int getCameraOffset();
+		int getWidth();
+		int getHeight();
+		Vector* getCameraOffset();
 		void printPos();
 		int drawDepth = 0;
 };

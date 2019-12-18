@@ -1,3 +1,28 @@
-﻿  Player.cpp
-c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\gameobjects\player.cpp(7): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  Camera.cpp
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\camera.cpp(15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\camera.cpp(16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\camera.cpp(21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\camera.cpp(22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\camera.cpp(29): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\camera.cpp(33): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  Game.cpp
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\game.cpp(8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\game.cpp(139): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\game.cpp(139): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\game.cpp(140): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\game.cpp(140): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\game.cpp(188): warning C4018: '<': signed/unsigned mismatch
+  MapManager.cpp
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(46): warning C4018: '<': signed/unsigned mismatch
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(52): warning C4018: '<': signed/unsigned mismatch
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(65): warning C4018: '<': signed/unsigned mismatch
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(79): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(95): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(92): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(113): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(113): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(114): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\aniki\dev\pokewarriormonsterssdl\pokewarriormonsters\pokewarriormonsters\src\mapmanager.cpp(114): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  Generating Code...
   pokeWarriorMonsters.vcxproj -> C:\Users\aniki\dev\pokeWarriorMonstersSDL\pokeWarriorMonsters\Debug\pokeWarriorMonsters.exe

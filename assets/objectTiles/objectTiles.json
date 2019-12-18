@@ -16,7 +16,7 @@
  "margin":0,
  "name":"trees",
  "spacing":0,
- "tilecount":5,
+ "tilecount":12,
  "tiledversion":"1.3.1",
  "tileheight":96,
  "tiles":[
@@ -54,8 +54,50 @@
          "imageheight":32,
          "imagewidth":32,
          "type":"WoodSign"
+        }, 
+        {
+         "id":7,
+         "image":"..\/sprites\/bigTreeSnow.png",
+         "imageheight":96,
+         "imagewidth":64
+        }, 
+        {
+         "id":8,
+         "image":"..\/sprites\/iceDoor.png",
+         "imageheight":64,
+         "imagewidth":32
+        }, 
+        {
+         "id":9,
+         "image":"..\/sprites\/iceExit.png",
+         "imageheight":32,
+         "imagewidth":96
+        }, 
+        {
+         "id":10,
+         "image":"..\/sprites\/iceRock.png",
+         "imageheight":42,
+         "imagewidth":32
+        }, 
+        {
+         "id":11,
+         "image":"..\/sprites\/snowGlob.png",
+         "imageheight":32,
+         "imagewidth":32
+        }, 
+        {
+         "id":12,
+         "image":"..\/sprites\/snowGlob2.png",
+         "imageheight":32,
+         "imagewidth":32
+        }, 
+        {
+         "id":13,
+         "image":"..\/sprites\/snowTree.png",
+         "imageheight":96,
+         "imagewidth":64
         }],
- "tilewidth":64,
+ "tilewidth":96,
  "type":"tileset",
  "version":1.2
 }

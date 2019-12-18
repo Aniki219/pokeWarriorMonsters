@@ -1,8 +1,6 @@
 #include "_Headers/Game.h"
 #include "_Headers/InputHandler.h"
 
-
-
 Game* Game::instance = 0;
 
 GameObject* createGameObjectType(const std::string typeName, std::string textureName, int xpos, int ypos, int width, int height) {
@@ -10,15 +8,23 @@ GameObject* createGameObjectType(const std::string typeName, std::string texture
 	if (typeName == "Player") { return new Player(xpos, ypos); }
 	if (typeName == "Tile") { return new Wall(textureName, xpos, ypos, width, height); }
 	if (typeName == "Wall") { return new Wall(textureName, xpos, ypos, width, height); }
+	if (typeName == "Tree") { return new Wall(textureName, xpos, ypos, width, height); }
 	if (typeName == "Door") { return new Wall(textureName, xpos, ypos, width, height); }
 	if (typeName == "Sign") { return new Wall(textureName, xpos, ypos, width, height); }
 
-	return 0;
+	return new Wall(textureName, xpos, ypos, width, height);
 }
 
-GameObject* Game::createGameObject(std::string typeName, std::string textureName, int xpos, int ypos, int width, int height) {
+GameObject* Game::createGameObject(std::string typeName, std::string textureName, int xpos, int ypos, int width, int height, int layer = 0) {
 	GameObject* gameObject = createGameObjectType(typeName, textureName, xpos, ypos, width, height);
-	gameObjects.push_back(gameObject);
+	if (typeName == "Player") {
+		gameObjects.push_back(gameObject);
+	}
+	else {
+		const int index = MapManager::getIndex(xpos, ypos);
+		tileObjectMap[{ index, layer }] = gameObject;
+	}
+
 	sortedByDepth = false;
 	return gameObject;
 }
@@ -35,11 +41,6 @@ bool Game::init(){
 	}
 	else
 	{
-		//Set texture filtering to linear
-		if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
-		{
-			printf("Warning: Linear texture filtering not enabled!");
-		}
 
 		//Create window
 		window = SDL_CreateWindow("PokeWarriorMonsters", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -65,7 +66,7 @@ bool Game::init(){
 				SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
 				//Initialize PNG loading
-				int imgFlags = IMG_INIT_PNG;
+				const int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags) & imgFlags))
 				{
 					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
@@ -75,11 +76,6 @@ bool Game::init(){
 		}
 	}
 	TextureManager::Instance()->init();
-
-	GameObject* player = new Player(320, 192);
-	gameObjects.push_back(player);
-	camera = new Camera(0, 0);
-	camera->setTarget(player);
 
 	return success;
 }
@@ -122,13 +118,47 @@ void Game::render() {
 	SDL_RenderClear(renderer);
 
 	//Render texture to screen
-	if (!sortedByDepth) { sortByDepth(); }
-	for (GameObject* g : gameObjects) {
+	sortByDepth();
+
+	for (GameObject* g : toRender) {
 		g->draw();
 	}
-	
+
 	//Update screen
 	SDL_RenderPresent(renderer);
+}
+
+void Game::setRenderObjects() {
+	toRender.clear();
+
+	const int renderMargin = 3;
+	const int screenRows = SCREEN_HEIGHT / GRIDSIZE;
+	const int screenCols = SCREEN_WIDTH / GRIDSIZE;
+	const int numCols = MapManager::Instance()->getMapWidth();
+	const int numRows = MapManager::Instance()->getMapHeight();
+	const int startCol = std::fmax(0,(camera->getX() - renderMargin*GRIDSIZE) / GRIDSIZE);
+	const int startRow = std::fmax(0,(camera->getY() - renderMargin*GRIDSIZE) / GRIDSIZE);
+	
+	for (int k = 0; k < MapManager::Instance()->getNumLayers(); k++) {
+		for (int j = startRow; j < startRow + screenRows + renderMargin*2 && j < numRows; j++) {
+			for (int i = startCol; i < startCol + screenCols + renderMargin*2 && i < numCols; i++) {
+				const int index = MapManager::getIndex(i * GRIDSIZE, j * GRIDSIZE);
+
+				if (tileObjectMap.count({ index, k }) > 0) {
+					toRender.push_back(tileObjectMap[{index, k}]);
+				}
+			}
+		}
+	}
+	for (GameObject* g : gameObjects) {
+		if (g->getX() >= camera->getX() - g->getWidth() &&
+			g->getY() >= camera->getY() - g->getHeight() &&
+			g->getX() <= camera->getX() + SCREEN_WIDTH + g->getWidth() &&
+			g->getY() <= camera->getY() + SCREEN_HEIGHT + g->getHeight()) {
+			toRender.push_back(g);
+		}
+	}
+	sortedByDepth = false; 
 }
 
 void Game::quit() {
@@ -152,16 +182,16 @@ void Game::close() {
 }
 
 void Game::sortByDepth() {
-	while (!sortedByDepth) {
+
+	while (!sortedByDepth && toRender.size() >= 2) {
 		sortedByDepth = true;
-		for (int i = 0; i < gameObjects.size() - 1; i++) {
-			if (gameObjects[i]->drawDepth > gameObjects[i + 1]->drawDepth) {
-				GameObject* temp = gameObjects[i];
-				gameObjects[i] = gameObjects[i + 1];
-				gameObjects[i + 1] = temp;
+		for (int i = 0; i < toRender.size() - 1; i++) {
+			if (toRender[i]->drawDepth > toRender[i + 1]->drawDepth) {
+				GameObject* temp = toRender[i];
+				toRender[i] = toRender[i + 1];
+				toRender[i + 1] = temp;
 				sortedByDepth = false;
 			}
 		}
 	}
-
 }

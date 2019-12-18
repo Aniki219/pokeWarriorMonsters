@@ -10,10 +10,11 @@ class MapManager {
 
 	int mapHeight;
 	int mapWidth;
+	int mapLayers;
 
 	static MapManager* instance;
 
-	SDL_Rect getSrcRect(int index);
+	SDL_Rect getSrcRect(int index, std::string tilesetName);
 
 public:
 	static MapManager* Instance() {
@@ -24,4 +25,8 @@ public:
 	}
 
 	void createMapObjects();
+	int getMapWidth();
+	int getMapHeight();
+	int getNumLayers();
+	static int getIndex(int x, int y);
 };

@@ -1,7 +1,7 @@
 #include "../_Headers/GameObjects/GameObject.h"
 #include "../_Headers/Sprite.h"
 
-GameObject::GameObject(std::string textureName, int xpos = 0, int ypos = 0, int width = 32, int height = 32) {
+GameObject::GameObject(std::string textureName, int xpos = 0, int ypos = 0, int width = GRIDSIZE, int height = GRIDSIZE) {
 	position = new Vector((float)xpos, (float)ypos);
 	velocity = new Vector(0, 0);
 	size = new Vector((float)width, (float)height);
@@ -53,6 +53,15 @@ int GameObject::getY() {
 	return position->y;
 }
 
-int GameObject::getCameraOffset() {
-	return size->y - sprite->imageOffset->y;
+int GameObject::getWidth() {
+	return size->x;
+}
+
+int GameObject::getHeight() {
+	return size->y;
+}
+
+Vector* GameObject::getCameraOffset() {
+	Vector* offset = new Vector((float)(size->x - sprite->imageOffset->x), (float)(size->y - sprite->imageOffset->y));
+	return offset;
 }
